@@ -31,9 +31,15 @@ export class TessraDB {
         }
         return collect
     }
+    /**
+     * Returns names of all collections
+     */
     public get colNames(){
         return fs.readdirSync(this.name);
     }
+    /**
+     * Creates collection
+     */
     public async createCollection(name:string){
         if(this.colNames.indexOf(name)<0) await fs.promises.writeFile(path.join(this.name, name), "[]");
         else throw new Error("Collection already exists. Please, drop collection");
