@@ -14,6 +14,7 @@
 - [x] Create collection (createCollection)
 - [x] Read all collections (db.collections)
 - [ ] Insert documents to collection (insert, insertMany)
+- [ ] Delete documents from collection (delete, deleteMany)
 - [ ] Find documents in collection (functions find, findOne like in mongodb, but without atomic operations(for now)
 - [ ] Replace documents by value (replace, replaceOne)
 - [ ] Update documents by value (update, updateOne)

@@ -15,6 +15,7 @@
 - [x] Создание коллекции (createCollection)
 - [x] Получение всех коллекций (db.collections)
 - [ ] Вставка документов в коллекцию (insert, insertMany)
+- [ ] Удаление документов из коллекции (delete, deleteMany)
 - [ ] Поиск документов в коллекции (функции find, findOne like in mongodb, но без атомрных операций (пока что)
 - [ ] Замена документа по значению (replace, replaceOne)
 - [ ] Обновление документа по значению (update, updateOne)
