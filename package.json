@@ -1,0 +1,36 @@
+{
+  "name": "tessradb",
+  "version": "0.1.0",
+  "description": "A local noSQL database",
+  "main": "./lib/index.js",
+  "types": "./lib/index.d.ts",
+  "scripts": {
+    "test": "mocha tests.spec.js",
+    "coverage": "nyc npm run test",
+    "coveralls": "npm run coverage && nyc report --reporter=text-lcov | coveralls",
+    "co-publish": "tsc . && npm run coveralls && npm run docs && npm publish",
+    "comp":"tsc ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/artegoser/TessraDB.git"
+  },
+  "keywords": [
+    "noSQL",
+    "DB",
+    "database",
+    "local",
+    "localdb",
+    "localdatabase"
+  ],
+  "author": "artegoser",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/artegoser/TessraDB/issues"
+  },
+  "homepage": "https://github.com/artegoser/TessraDB#readme",
+  "devDependencies": {
+    "mocha": "^9.1.3",
+    "nyc": "^15.1.0"
+  }
+}
