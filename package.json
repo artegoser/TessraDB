@@ -1,6 +1,6 @@
 {
   "name": "tessradb",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A local noSQL database",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
@@ -9,7 +9,7 @@
     "ctest": "npm run comp && npm run test",
     "coverage": "nyc npm run test",
     "coveralls": "npm run coverage && nyc report --reporter=text-lcov | coveralls",
-    "co-publish": "npm run comp && npm run coveralls && npm publish",
+    "co-publish": "npm run comp && npm publish",
     "comp": "tsc"
   },
   "nyc": {
