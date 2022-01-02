@@ -3,5 +3,5 @@
 |--|--|
 
 
-# TesseractDB
- TesseractDB это локальная noSQL база данных
+# TessraDB
+ TessraDB это локальная noSQL база данных

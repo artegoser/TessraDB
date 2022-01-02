@@ -3,5 +3,5 @@
 |--|--|
 
 
-# TesseractDB
- TesseractDB is local noSQL database
+# TessraDB
+ TessraDB is local noSQL database
