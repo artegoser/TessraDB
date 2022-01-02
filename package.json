@@ -5,11 +5,11 @@
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
   "scripts": {
-    "test": "mocha tests.spec.js",
+    "test": "mocha ./tests/tests.spec.js",
     "ctest": "npm run comp && npm run test",
     "coverage": "nyc npm run test",
     "coveralls": "npm run coverage && nyc report --reporter=text-lcov | coveralls",
-    "co-publish": "tsc . && npm run coveralls && npm run docs && npm publish",
+    "co-publish": "npm run comp && npm run coveralls && npm publish",
     "comp": "tsc"
   },
   "nyc": {
@@ -34,6 +34,7 @@
   },
   "homepage": "https://github.com/artegoser/TessraDB#readme",
   "devDependencies": {
+    "coveralls": "^3.1.1",
     "mocha": "^9.1.3",
     "nyc": "^15.1.0",
     "typescript": "^4.5.4"
