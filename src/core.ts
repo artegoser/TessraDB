@@ -14,7 +14,7 @@ export class TessraDB {
   /**
    * initialize TessraDB
    */
-  private init() {
+  private init(): void {
     if (!fs.existsSync(this.name)) {
       fs.mkdirSync(this.name);
     }
@@ -24,7 +24,7 @@ export class TessraDB {
    * Do not use if the database is large
    * @returns all collections in db
    */
-  public get collections() {
+  public get collections(): Object {
     let collect = {};
     let filenames = fs.readdirSync(this.name);
     for (let filename of filenames) {
@@ -39,7 +39,7 @@ export class TessraDB {
    * @param name name of the collection
    * @returns full collection
    */
-  public async getCollection(name: string) {
+  public async getCollection(name: string): Promise<Object> {
     try {
       let file = await fs.promises.readFile(
         path.join(this.name, name),
@@ -54,14 +54,14 @@ export class TessraDB {
   /**
    * @returns names of all collections
    */
-  public get colNames() {
+  public get colNames(): Array<string> {
     return fs.readdirSync(this.name);
   }
   /**
    * Creates collection
    * @param name name of the collection
    */
-  public async createCollection(name: string) {
+  public async createCollection(name: string): Promise<void> {
     if (this.colNames.indexOf(name) < 0)
       await fs.promises.writeFile(path.join(this.name, name), "[]");
     else throw new Error("Collection already exists. Please, drop collection");
