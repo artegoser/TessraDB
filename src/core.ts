@@ -41,7 +41,7 @@ export class TessraDB {
       );
       return JSON.parse(file);
     } catch (e) {
-      if (e.errno === -4058) throw new Error("Collection does not exist");
+      if (e.code === "ENOENT") throw new Error("Collection does not exist");
       else throw e;
     }
   }
