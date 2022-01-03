@@ -22,6 +22,7 @@ export class TessraDB {
   /**
    * A collections object is a read-only variable that contains all the collections in the database
    * Do not use if the database is large
+   * @returns all collections in db
    */
   public get collections() {
     let collect = {};
@@ -33,6 +34,11 @@ export class TessraDB {
     }
     return collect;
   }
+  /**
+   * Function to get collection by name
+   * @param name name of the collection
+   * @returns full collection
+   */
   public async getCollection(name: string) {
     try {
       let file = await fs.promises.readFile(
@@ -46,13 +52,14 @@ export class TessraDB {
     }
   }
   /**
-   * Returns names of all collections
+   * @returns names of all collections
    */
   public get colNames() {
     return fs.readdirSync(this.name);
   }
   /**
    * Creates collection
+   * @param name name of the collection
    */
   public async createCollection(name: string) {
     if (this.colNames.indexOf(name) < 0)
