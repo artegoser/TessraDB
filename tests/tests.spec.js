@@ -20,6 +20,7 @@ function createDb() {
 }
 
 let fs = require("fs");
+let path = require("path")
 
 function removefiles(dbname) {
   fs.rmdirSync(dbname, { recursive: true });
@@ -31,6 +32,17 @@ describe("FS", () => {
       for (let folder of folderstodelete) {
         removefiles(folder);
       }
+    });
+
+    it("do not create a folder if it already exists", async () => {
+      let name = genid();
+      fs.mkdirSync(name);
+      let db = new TessraDB(name);
+      folderstodelete.push(db.name);
+      
+      await db.createCollection("helloworld");
+      if (db.colNames.indexOf("helloworld") < 0)
+        throw new Error("collection is not created");
     });
 
     it("create collections", async () => {
@@ -58,6 +70,18 @@ describe("FS", () => {
       if (error === false) throw new Error("there was no error");
     });
 
+    it("throw an error if it is impossible to get the collection", async () => {
+      let db = createDb();
+      fs.writeFileSync(path.join(db.name, "helloworld"), "notjson") //error with parsing json
+      let error = false;
+      try {
+        await db.getCollection("helloworld");
+      } catch {
+        error = true;
+      }
+      if (error === false) throw new Error("there was no error");
+    });
+
     it("throw error if collection already exists", async () => {
       let db = createDb();
       let error = false;
@@ -70,9 +94,10 @@ describe("FS", () => {
       if (error === false) throw new Error("there was no error");
     });
 
-    it("returning parsed collections", () => {
+    it("returning parsed collections", async () => {
       let db = createDb();
-      if (!db.collections) throw new Error("No collections");
+      await db.createCollection("helloworld");
+      if (!db.collections.helloworld) throw new Error("No collections");
     });
   });
 });
