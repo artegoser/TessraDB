@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/artegoser/TessraDB/compare/v1.0.1...v1.0.2) (2022-01-03)
+
+
+### Bug Fixes
+
+* **core:** change error handling ([dd9f0fa](https://github.com/artegoser/TessraDB/commit/dd9f0faef4e74a67480fdad6ef7f1869fd66646c))
+
 ## [1.0.1](https://github.com/artegoser/TessraDB/compare/v1.0.0...v1.0.1) (2022-01-03)
 
 
