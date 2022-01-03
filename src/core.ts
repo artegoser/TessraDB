@@ -31,8 +31,14 @@ export class TessraDB {
         }
         return collect
     }
-    public getCollection(name:string){
-        return JSON.parse(fs.readFileSync(path.join(this.name, name), "utf-8"));
+    public async getCollection(name:string){
+        try{
+            let file = await fs.promises.readFile(path.join(this.name, name), "utf-8")
+            return JSON.parse(file);
+        } catch(e){
+            if(e.errno===-4058) throw new Error("Collection does not exist")
+            else throw e;
+        }
     }
     /**
      * Returns names of all collections
