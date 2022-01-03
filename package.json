@@ -1,6 +1,6 @@
 {
   "name": "tessradb",
-  "version": "0.1.2",
+  "version": "0.0.0-auto-semantic",
   "description": "A local noSQL database",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
