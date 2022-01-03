@@ -31,6 +31,9 @@ export class TessraDB {
         }
         return collect
     }
+    public getCollection(name:string){
+        return JSON.parse(fs.readFileSync(path.join(this.name, name), "utf-8"));
+    }
     /**
      * Returns names of all collections
      */

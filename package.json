@@ -6,11 +6,11 @@
   "types": "./lib/index.d.ts",
   "scripts": {
     "test": "mocha ./tests/tests.spec.js",
-    "ctest": "npm run comp && npm run test",
+    "ctest": "npm run build && npm run test",
     "coverage": "nyc npm run test",
     "coveralls": "npm run coverage && nyc report --reporter=text-lcov | coveralls",
-    "co-publish": "npm run comp && npm publish",
-    "comp": "tsc"
+    "co-publish": "npm run build && npm publish",
+    "build": "tsc"
   },
   "nyc": {
     "exclude": "**/*.spec.js"
@@ -34,7 +34,10 @@
   },
   "homepage": "https://github.com/artegoser/TessraDB#readme",
   "devDependencies": {
+    "@commitlint/cli": "^16.0.1",
+    "@commitlint/config-conventional": "^16.0.0",
     "coveralls": "^3.1.1",
+    "husky": "^7.0.4",
     "mocha": "^9.1.3",
     "nyc": "^15.1.0",
     "typescript": "^4.5.4"
