@@ -13,6 +13,7 @@
 - [x] Creating a DB
 - [x] Create collection (createCollection)
 - [x] Read all collections (db.collections)
+- [x] Get collection by name (db.getCollection())
 - [ ] Insert documents to collection (insert, insertMany)
 - [ ] Delete documents from collection (delete, deleteMany)
 - [ ] Find documents in collection (functions find, findOne like in mongodb, but without atomic operations(for now)
