@@ -1,4 +1,5 @@
 let {TessraDB} = require("../lib/index");
+let folderstodelete = []
 
 function genid(){
     let length = 8;
@@ -12,8 +13,13 @@ function genid(){
     return result;
 }
 
+function createDb(){
+    let db = new TessraDB(genid());
+    folderstodelete.push(db.name);
+    return db;
+}
+
 let fs = require("fs");
-let path = require("path")
 
 
 function removefiles(dbname){
@@ -23,15 +29,37 @@ function removefiles(dbname){
 describe("FS", ()=>{
     describe("collections", ()=>{
 
+        after(()=>{
+            for(let folder of folderstodelete){
+                removefiles(folder);
+            }
+        });
+
         it("create collections", async ()=>{
-            let db = new TessraDB(genid());
+            let db = createDb();
             await db.createCollection("helloworld");
             if(db.colNames.indexOf("helloworld")<0) throw new Error("collection is not created");
-            removefiles(db.name);
+        });
+
+        it("get collection by name", async ()=>{
+            let db = createDb();
+            await db.createCollection("helloworld");
+            if(!(await db.getCollection("helloworld"))) throw new Error("collection is not created");
+        });
+
+        it("throw error if collection doesnt exists", async ()=>{
+            let db = createDb();
+            let error = false;
+            try{
+                await db.getCollection("nothelloworld");
+            } catch{
+                error = true;
+            }
+            if(error===false) throw new Error("there was no error");
         });
 
         it("throw error if collection already exists", async ()=>{
-            let db = new TessraDB(genid());
+            let db = createDb();
             let error = false;
             try{
                 await db.createCollection("helloworld");
@@ -40,13 +68,11 @@ describe("FS", ()=>{
                 error = true;
             }
             if(error===false) throw new Error("there was no error");
-            removefiles(db.name);
         });
 
         it("returning parsed collections", ()=>{
-            let db = new TessraDB(genid());
+            let db = createDb();
             if(!db.collections) throw new Error("No collections");
-            removefiles(db.name);
         });
     });
 });
