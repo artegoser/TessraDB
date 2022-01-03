@@ -4,7 +4,7 @@
 
 
 /TessraDB
-
+.coveralls.yml
 
 # Logs
 logs
@@ -82,4 +82,3 @@ typings/
 
 # FuseBox cache
 .fusebox/
-.coveralls.yml
