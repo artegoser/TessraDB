@@ -1,3 +1,21 @@
+# [1.2.0](https://github.com/artegoser/TessraDB/compare/v1.1.0...v1.2.0) (2022-01-04)
+
+
+### Bug Fixes
+
+* **atom writer:** remove this ([6e6299c](https://github.com/artegoser/TessraDB/commit/6e6299c48aba9d25690b1c88e268d681ae52a4df))
+
+
+### Features
+
+* atomic writer ([1646b06](https://github.com/artegoser/TessraDB/commit/1646b06fcde00b2100f1b0a617fd3221631f1228))
+* collection class ([7c7f19c](https://github.com/artegoser/TessraDB/commit/7c7f19c2ef1b9dcbdd39bedc2c33ae2e6b8a88e8))
+
+
+### Performance Improvements
+
+* replace fs with atomic writer ([41b618d](https://github.com/artegoser/TessraDB/commit/41b618d4eadf6c7c97084e4ac156f50cb0f0d2b0))
+
 # [1.1.0](https://github.com/artegoser/TessraDB/compare/v1.0.2...v1.1.0) (2022-01-04)
 
 
