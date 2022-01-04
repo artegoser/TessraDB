@@ -6,18 +6,34 @@ import * as path from "path";
  * Main class of TessraDB
  */
 export class TessraDB {
-  name: string;
+  public name: string;
+  public colNames: Array<string>;
+  #metaPath: string;
   constructor(name: string) {
     this.name = name;
-    this.init();
+    this.#metaPath = path.join(this.name, "collections.temeta");
+    this.#init();
   }
   /**
    * initialize TessraDB
    */
-  private init(): void {
+  #init(): void {
     if (!fs.existsSync(this.name)) {
       fs.mkdirSync(this.name);
     }
+    if(fs.existsSync(this.#metaPath)){
+      this.colNames = JSON.parse(fs.readFileSync(`${this.name}/collections.temeta`, "utf-8"));
+    } else{
+      this.colNames = [];
+      fs.writeFileSync(this.#metaPath, "[]");
+    }
+  }
+  /**
+   * Add collection to metadata .temeta file
+   */
+  async #addCollectionToMeta(name): Promise<void>{
+    this.colNames.push(name);
+    await fs.promises.writeFile(this.#metaPath, JSON.stringify(this.colNames));
   }
   /**
    * A collections object is a read-only variable that contains all the collections in the database
@@ -26,10 +42,9 @@ export class TessraDB {
    */
   public get collections(): Object {
     let collect = {};
-    let filenames = fs.readdirSync(this.name);
-    for (let filename of filenames) {
+    for (let filename of this.colNames) {
       collect[filename] = JSON.parse(
-        fs.readFileSync(path.join(this.name, filename), "utf-8")
+        fs.readFileSync(path.join(this.name, filename+".tdb"), "utf-8")
       );
     }
     return collect;
@@ -42,7 +57,7 @@ export class TessraDB {
   public async getCollection(name: string): Promise<Object> {
     try {
       let file = await fs.promises.readFile(
-        path.join(this.name, name),
+        path.join(this.name, name+".tdb"),
         "utf-8"
       );
       return JSON.parse(file);
@@ -52,18 +67,12 @@ export class TessraDB {
     }
   }
   /**
-   * @returns names of all collections
-   */
-  public get colNames(): Array<string> {
-    return fs.readdirSync(this.name);
-  }
-  /**
    * Creates collection
    * @param name name of the collection
    */
   public async createCollection(name: string): Promise<void> {
-    if (this.colNames.indexOf(name) < 0)
-      await fs.promises.writeFile(path.join(this.name, name), "[]");
-    else throw new Error("Collection already exists. Please, drop collection");
+    if (!(this.colNames.indexOf(name) < 0)) throw new Error("Collection already exists. Please, drop collection");
+    await fs.promises.writeFile(path.join(this.name, name+".tdb"), "[]");
+    await this.#addCollectionToMeta(name);
   }
 }

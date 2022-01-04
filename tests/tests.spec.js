@@ -23,7 +23,7 @@ let fs = require("fs");
 let path = require("path")
 
 function removefiles(dbname) {
-  fs.rmdirSync(dbname, { recursive: true });
+  fs.rmSync(dbname, { recursive: true });
 }
 
 describe("FS", () => {
