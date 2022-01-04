@@ -1,5 +1,5 @@
-import * as fs from "fs";
-import * as JSONS from "JSONStream";
+import * as aw from "./atomWrite"
+import * as fs from "fs"
 import * as path from "path";
 
 /**
@@ -25,7 +25,7 @@ export class TessraDB {
       this.colNames = JSON.parse(fs.readFileSync(`${this.name}/collections.temeta`, "utf-8"));
     } else{
       this.colNames = [];
-      fs.writeFileSync(this.#metaPath, "[]");
+      aw.writeFileSync(this.#metaPath, "[]");
     }
   }
   /**
@@ -33,7 +33,7 @@ export class TessraDB {
    */
   async #addCollectionToMeta(name): Promise<void>{
     this.colNames.push(name);
-    await fs.promises.writeFile(this.#metaPath, JSON.stringify(this.colNames));
+    await aw.writeFile(this.#metaPath, JSON.stringify(this.colNames));
   }
   /**
    * A collections object is a read-only variable that contains all the collections in the database
@@ -72,7 +72,7 @@ export class TessraDB {
    */
   public async createCollection(name: string): Promise<void> {
     if (!(this.colNames.indexOf(name) < 0)) throw new Error("Collection already exists. Please, drop collection");
-    await fs.promises.writeFile(path.join(this.name, name+".tdb"), "[]");
+    await aw.writeFile(path.join(this.name, name+".tdb"), "[]");
     await this.#addCollectionToMeta(name);
   }
 }
