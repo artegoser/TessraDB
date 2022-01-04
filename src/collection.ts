@@ -8,8 +8,10 @@ import * as fs from "fs";
  * (find, delete, insert, update)
  */
 export class TessraCollection {
-    public name:string
-    constructor(name:string){
+    public name:string;
+    public path:string;
+    constructor(name:string, path:string){
         this.name = name;
+        this.path = path;
     }
 }
