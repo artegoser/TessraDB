@@ -72,7 +72,7 @@ describe("FS", () => {
 
     it("throw an error if it is impossible to get the collection", async () => {
       let db = createDb();
-      fs.writeFileSync(path.join(db.name, "helloworld"), "notjson") //error with parsing json
+      fs.writeFileSync(path.join(db.name, "helloworld.tdb"), "notjson") //error with parsing json
       let error = false;
       try {
         await db.getCollection("helloworld");
