@@ -8,11 +8,11 @@ function getTemp(name:string){
 export async function writeFile(filename:string, data:string){
   let tempfilename = getTemp(filename);
   await fs.promises.writeFile(tempfilename, data, 'utf-8');
-  await fs.promises.rename(tempfilename, this.filename);
+  await fs.promises.rename(tempfilename, filename);
 }
 
 export function writeFileSync(filename:string, data:string){
   let tempfilename = getTemp(filename);
   fs.writeFileSync(tempfilename, data, 'utf-8');
-  fs.renameSync(tempfilename, this.filename);
+  fs.renameSync(tempfilename, filename);
 }
