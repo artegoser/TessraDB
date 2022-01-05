@@ -1,0 +1,3 @@
+special-vendored-path /tests * linguist-vendored
+commitlint.config.js linguist-vendored
+release.config.js linguist-vendored 
