@@ -37,8 +37,8 @@ export class TessraDB {
    * @param name name of the collection
    * @returns Path to Collection
    */
-  #getCollectionPath(name:string) : string {
-    return path.join(this.name, name + ".tdb")
+  #getCollectionPath(name: string): string {
+    return path.join(this.name, name + ".tdb");
   }
   /**
    * Add collection to metadata .temeta file
@@ -52,9 +52,12 @@ export class TessraDB {
    * @returns all collections in db
    */
   public get collections(): CollectionObject {
-    let collect : CollectionObject = {};
+    let collect: CollectionObject = {};
     for (let collectionName of this.colNames) {
-      collect[collectionName] = new TessraCollection(collectionName, this.#getCollectionPath(collectionName));
+      collect[collectionName] = new TessraCollection(
+        collectionName,
+        this.#getCollectionPath(collectionName)
+      );
     }
     return collect;
   }
@@ -64,6 +67,8 @@ export class TessraDB {
    * @returns full collection
    */
   public async getCollection(name: string): Promise<TessraCollection> {
+    if (this.colNames.indexOf(name) < 0)
+      await this.#addCollectionToMeta(name);
     let collection = new TessraCollection(name, this.#getCollectionPath(name));
     return collection;
   }
