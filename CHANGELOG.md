@@ -1,3 +1,12 @@
+# [1.4.0](https://github.com/artegoser/TessraDB/compare/v1.3.0...v1.4.0) (2022-01-05)
+
+
+### Features
+
+* **collection:** insertMany ([867ddb1](https://github.com/artegoser/TessraDB/commit/867ddb1df752d4d2b5119c196a98d348f4c7faea))
+* find ([796366c](https://github.com/artegoser/TessraDB/commit/796366c2a0872d5335b211808daa6f7e757b5a8f))
+* insertMany ([44e8a53](https://github.com/artegoser/TessraDB/commit/44e8a53a1ff134c0637924de5dcab27e5d22eed0))
+
 # [1.3.0](https://github.com/artegoser/TessraDB/compare/v1.2.0...v1.3.0) (2022-01-05)
 
 
