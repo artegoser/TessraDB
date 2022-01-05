@@ -47,4 +47,29 @@ export class TessraCollection {
         });
       });
   }
+  /**
+   * Insert a many documents to collection
+   * @param docArray array of documents to insert
+   */
+   public insertMany(docArray: Array<Object>): Promise<void> {
+    return new Promise(async (res, rej)=>{
+      this.#locked = true;
+      let readStream = fs.createReadStream(this.path);
+      let objReadStream = JSONS.parse([true]);
+      let objWriteStream = await aw.objWriteStream(this.path);
+      readStream.pipe(objReadStream);
+
+      objReadStream.on("data", (data)=>{
+          objWriteStream.stream.write(data);
+      });
+
+      objReadStream.on("end", async ()=>{
+          for(let doc of docArray){
+            objWriteStream.stream.write(doc);
+          }
+          await objWriteStream.end();
+          res();
+      });
+    });
+}
 }
