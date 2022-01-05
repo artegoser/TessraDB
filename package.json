@@ -6,7 +6,8 @@
   "types": "./lib/index.d.ts",
   "scripts": {
     "test": "mocha ./tests/tests.spec.js",
-    "ctest": "npm run build && npm run test",
+    "btest": "npm run build && npm run test",
+    "bcoverage": "npm run build && npm run coverage",
     "coverage": "nyc npm run test",
     "coveralls": "npm run coverage && nyc report --reporter=text-lcov | coveralls",
     "co-publish": "npm run build && npm publish",

@@ -1,12 +1,11 @@
 import { WriteStream } from "fs";
 import { TessraCollection } from "./collection";
 
-export interface CollectionObject {
+export interface collectionObject {
   [collectionName: string]: TessraCollection;
 }
 
-export interface CollectionDocument {
-  _id: string;
+export interface collectionDocument {
   [keys: string]: any;
 }
 
