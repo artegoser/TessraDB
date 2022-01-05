@@ -26,6 +26,40 @@ export class TessraCollection {
     }
   }
   /**
+   * checking the object for compliance with the filter
+   * @param filt filter for object ({id:1, type:"help"})
+   * @param obj object to compare
+   * @returns {boolean}
+   */
+  #isFiltValid(filt: Object, obj: Object) {
+    let filtnames: Array<string> = Object.keys(filt);
+    for (let filtname of filtnames) {
+      if (filt[filtname] !== obj[filtname]) return false;
+    }
+    return true;
+  }
+  public find(filter: Object): Promise<Array<collectionDocument>> {
+    return new Promise(async (res, rej) => {
+      let readStream = fs.createReadStream(this.path);
+      let objReadStream = JSONS.parse([true]);
+      readStream.pipe(objReadStream);
+
+      let response: Array<collectionDocument> = [];
+
+      objReadStream.on("error", (err) => {
+        rej(err);
+      });
+
+      objReadStream.on("data", (data) => {
+        if (this.#isFiltValid(filter, data)) response.push(data);
+      });
+
+      objReadStream.on("end", async () => {
+        res(response);
+      });
+    });
+  }
+  /**
    * Insert a document to collection
    * @param doc Document to insert
    */
