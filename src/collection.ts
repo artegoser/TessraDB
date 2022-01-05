@@ -63,24 +63,28 @@ export class TessraCollection {
    * Insert a document to collection
    * @param doc Document to insert
    */
-  public insert(doc: Object): Promise<void> {
-      return new Promise(async (res, rej)=>{
-        this.#locked = true;
-        let readStream = fs.createReadStream(this.path);
-        let objReadStream = JSONS.parse([true]);
-        let objWriteStream = await aw.objWriteStream(this.path);
-        readStream.pipe(objReadStream);
+  public insert(doc: collectionDocument): Promise<void> {
+    return new Promise(async (res, rej) => {
+      this.#locked = true;
+      let readStream = fs.createReadStream(this.path);
+      let objReadStream = JSONS.parse([true]);
+      let objWriteStream = await aw.objWriteStream(this.path);
+      readStream.pipe(objReadStream);
 
-        objReadStream.on("data", (data)=>{
-            objWriteStream.stream.write(data);
-        });
-
-        objReadStream.on("end", async ()=>{
-            objWriteStream.stream.write(doc);
-            await objWriteStream.end();
-            res();
-        });
+      objReadStream.on("error", (err) => {
+        rej(err);
       });
+
+      objReadStream.on("data", (data) => {
+        objWriteStream.stream.write(data);
+      });
+
+      objReadStream.on("end", async () => {
+        objWriteStream.stream.write(doc);
+        await objWriteStream.end();
+        res();
+      });
+    });
   }
   /**
    * Insert a many documents to collection
