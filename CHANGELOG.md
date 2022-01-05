@@ -1,3 +1,18 @@
+# [1.3.0](https://github.com/artegoser/TessraDB/compare/v1.2.0...v1.3.0) (2022-01-05)
+
+
+### Bug Fixes
+
+* **core:** add collection to meta from db.getCollection function ([641d64d](https://github.com/artegoser/TessraDB/commit/641d64d95df8890208d879ae248b7bfdf6fcfc53))
+
+
+### Features
+
+* add interfaces file ([aab02a9](https://github.com/artegoser/TessraDB/commit/aab02a950704c86a672938299dc30cc2270ce97e))
+* **atomWrite:** create Obj write stream ([917a867](https://github.com/artegoser/TessraDB/commit/917a8678fb9d678cd94eb24043d38f7f0f477dd2))
+* **collection:** insert document function (db.insert()) ([e332b6e](https://github.com/artegoser/TessraDB/commit/e332b6e029287be77561521077b88ad62dfba0d3))
+* integrate collections object to main class of tessradb ([0130b17](https://github.com/artegoser/TessraDB/commit/0130b1762dcaab7ef622c6aedeeef8321f201080))
+
 # [1.2.0](https://github.com/artegoser/TessraDB/compare/v1.1.0...v1.2.0) (2022-01-04)
 
 
