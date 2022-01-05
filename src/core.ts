@@ -2,7 +2,7 @@ import * as aw from "./atomWrite";
 import * as fs from "fs";
 import * as path from "path";
 import { TessraCollection } from "./collection";
-import { CollectionObject } from "./interfaces";
+import { collectionObject } from "./interfaces";
 
 /**
  * Main class of TessraDB
@@ -51,8 +51,8 @@ export class TessraDB {
    * A collections object is a read-only variable that contains all the collections in the database
    * @returns all collections in db
    */
-  public get collections(): CollectionObject {
-    let collect: CollectionObject = {};
+  public get collections(): collectionObject {
+    let collect: collectionObject = {};
     for (let collectionName of this.colNames) {
       collect[collectionName] = new TessraCollection(
         collectionName,
@@ -67,8 +67,7 @@ export class TessraDB {
    * @returns full collection
    */
   public async getCollection(name: string): Promise<TessraCollection> {
-    if (this.colNames.indexOf(name) < 0)
-      await this.#addCollectionToMeta(name);
+    if (this.colNames.indexOf(name) < 0) await this.#addCollectionToMeta(name);
     let collection = new TessraCollection(name, this.#getCollectionPath(name));
     return collection;
   }
