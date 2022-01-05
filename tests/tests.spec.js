@@ -3,7 +3,7 @@ let folderstodelete = [];
 
 function genid() {
   let length = 8;
-  var result = "";
+  var result = "A1";
   var characters =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
   var charactersLength = characters.length;
@@ -20,29 +20,40 @@ function createDb() {
 }
 
 let fs = require("fs");
-let path = require("path")
+let path = require("path");
 
 function removefiles(dbname) {
   fs.rmSync(dbname, { recursive: true });
 }
 
 describe("FS", () => {
+  after(() => {
+    for (let folder of folderstodelete) {
+      removefiles(folder);
+    }
+  });
   describe("collections", () => {
-    after(() => {
-      for (let folder of folderstodelete) {
-        removefiles(folder);
-      }
-    });
-
     it("do not create a folder if it already exists", async () => {
       let name = genid();
       fs.mkdirSync(name);
       let db = new TessraDB(name);
       folderstodelete.push(db.name);
-      
-      await db.createCollection("helloworld");
-      if (db.colNames.indexOf("helloworld") < 0)
-        throw new Error("collection is not created");
+
+      if (!fs.existsSync(name)) {
+        throw new Error("folder created")
+      }
+    });
+
+    it("do not create a metafile if it already exists", async () => {
+      let name = genid();
+      fs.mkdirSync(name);
+      fs.writeFileSync(path.join(name, "collections.temeta"), "[]");
+      let db = new TessraDB(name);
+      folderstodelete.push(db.name);
+
+      if (!fs.existsSync(path.join(name, "collections.temeta"))) {
+        throw new Error("file created")
+      }
     });
 
     it("create collections", async () => {
@@ -59,27 +70,21 @@ describe("FS", () => {
         throw new Error("collection is not created");
     });
 
-    it("throw error if collection doesnt exists", async () => {
+    it("get collection without creating collection", async () => {
       let db = createDb();
-      let error = false;
-      try {
-        await db.getCollection("nothelloworld");
-      } catch {
-        error = true;
-      }
-      if (error === false) throw new Error("there was no error");
+      if (!(await db.getCollection("helloworld")))
+        throw new Error("collection is not created");
     });
 
-    it("throw an error if it is impossible to get the collection", async () => {
+    it("should insert document to collection", async () => {
       let db = createDb();
-      fs.writeFileSync(path.join(db.name, "helloworld.tdb"), "notjson") //error with parsing json
-      let error = false;
-      try {
-        await db.getCollection("helloworld");
-      } catch {
-        error = true;
-      }
-      if (error === false) throw new Error("there was no error");
+      let collection = await db.getCollection("helloworld");
+      if (!collection)
+        throw new Error("collection is not created");
+      await collection.insert({hello:"world"});
+      await collection.insert({hello:"dlrow"});
+      let filecol = JSON.parse(fs.readFileSync(collection.path, "utf-8"));
+      if(filecol[0].hello!=="world"&&filecol[1].hello!=="dlrow") throw new Error("document not inserted")
     });
 
     it("throw error if collection already exists", async () => {
