@@ -3,7 +3,7 @@ let folderstodelete = [];
 
 function genid() {
   let length = 8;
-  var result = "A1";
+  var result = "A1\\";
   var characters =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
   var charactersLength = characters.length;
@@ -27,10 +27,11 @@ function removefiles(dbname) {
 }
 
 describe("FS", () => {
+  before(() => {
+    fs.mkdirSync("A1");
+  });
   after(() => {
-    for (let folder of folderstodelete) {
-      removefiles(folder);
-    }
+    fs.rmSync("A1", { recursive: true, force: true });
   });
   describe("collections", () => {
     it("do not create a folder if it already exists", async () => {
@@ -40,7 +41,7 @@ describe("FS", () => {
       folderstodelete.push(db.name);
 
       if (!fs.existsSync(name)) {
-        throw new Error("folder created")
+        throw new Error("folder created");
       }
     });
 
@@ -52,7 +53,7 @@ describe("FS", () => {
       folderstodelete.push(db.name);
 
       if (!fs.existsSync(path.join(name, "collections.temeta"))) {
-        throw new Error("file created")
+        throw new Error("file created");
       }
     });
 
@@ -79,12 +80,62 @@ describe("FS", () => {
     it("should insert document to collection", async () => {
       let db = createDb();
       let collection = await db.getCollection("helloworld");
-      if (!collection)
-        throw new Error("collection is not created");
-      await collection.insert({hello:"world"});
-      await collection.insert({hello:"dlrow"});
+      await collection.insert({ hello: "world" });
+      await collection.insert({ hello: "dlrow" });
       let filecol = JSON.parse(fs.readFileSync(collection.path, "utf-8"));
-      if(filecol[0].hello!=="world"&&filecol[1].hello!=="dlrow") throw new Error("document not inserted")
+      if (filecol[0].hello !== "world" && filecol[1].hello !== "dlrow")
+        throw new Error("document not inserted");
+    });
+
+    it("should insert many documents to collection", async () => {
+      let db = createDb();
+      let collection = await db.getCollection("helloworld");
+      await collection.insertMany([{ hello: "world" }, { hello: "dlrow" }]);
+      await collection.insertMany([{ hello: "wor" }, { hello: "ld" }]);
+      let filecol = JSON.parse(fs.readFileSync(collection.path, "utf-8"));
+      if (filecol[0].hello !== "world" && filecol[3].hello !== "ld")
+        throw new Error("documents not inserted");
+    });
+
+    it("should throw error on stream error", async () => {
+      let db = createDb();
+      let collection = await db.getCollection("helloworld");
+      fs.writeFileSync(collection.path, "nawddawonjson");
+      let error = false;
+      try {
+        await collection.insert({ hello: "dlrow" });
+      } catch {
+        try {
+          await collection.insertMany([{ hello: "dlrow" }]);
+        } catch {
+          try {
+            await collection.find({});
+          } catch {
+            error = true;
+          }
+        }
+      }
+      if (error === false) throw new Error("there was no error");
+    });
+
+    it("find documents in collection", async () => {
+      let db = createDb();
+      let collection = await db.getCollection("helloworld");
+      await collection.insertMany([
+        { type: "man" },
+        { type: "man" },
+        { type: "woman" },
+        { type: "reptile" },
+      ]);
+      let response = await collection.find({ type: "man" });
+      if (
+        !(
+          response.length === 2 &&
+          response[0].type === "man" &&
+          response[1].type === "man"
+        )
+      )
+        throw new Error("not valid find");
     });
 
     it("throw error if collection already exists", async () => {
