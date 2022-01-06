@@ -1,5 +1,12 @@
 ##only npm
 /src
+/.github
+/tests
+/.husky
+commitlint.config.js
+release.config.js
+.gitattributes
+.travis.yml
 ##only npm
 
 /TessraDB
