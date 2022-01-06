@@ -98,5 +98,5 @@ TessraDB uses:
 
 ## License
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](/LICENSE)  
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/artegoser/TessraDB/blob/main/LICENSE)  
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fartegoser%2FTessraDB.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fartegoser%2FTessraDB?ref=badge_large)
