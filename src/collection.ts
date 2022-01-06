@@ -102,6 +102,7 @@ export class TessraCollection {
       readStream.pipe(objReadStream);
 
       objReadStream.on("error", (err) => {
+        this.#locked = false;
         rej(err);
       });
 
@@ -112,6 +113,7 @@ export class TessraCollection {
       objReadStream.on("end", async () => {
         objWriteStream.stream.write(doc);
         await objWriteStream.end();
+        this.#locked = false;
         res();
       });
     });
@@ -129,6 +131,7 @@ export class TessraCollection {
       readStream.pipe(objReadStream);
 
       objReadStream.on("error", (err) => {
+        this.#locked = false;
         rej(err);
       });
 
@@ -141,6 +144,7 @@ export class TessraCollection {
           objWriteStream.stream.write(doc);
         }
         await objWriteStream.end();
+        this.#locked = false;
         res();
       });
     });
