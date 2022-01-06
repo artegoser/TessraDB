@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/artegoser/TessraDB/compare/v1.4.0...v1.5.0) (2022-01-06)
+
+
+### Features
+
+* collection.findOne ([5f89316](https://github.com/artegoser/TessraDB/commit/5f8931643ecb479cd945d1a192af5a93438a158e))
+
 # [1.4.0](https://github.com/artegoser/TessraDB/compare/v1.3.0...v1.4.0) (2022-01-05)
 
 
