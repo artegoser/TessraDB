@@ -5,6 +5,7 @@
 
 /TessraDB
 .coveralls.yml
+/docs
 
 # Logs
 logs

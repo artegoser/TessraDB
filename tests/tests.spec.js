@@ -28,7 +28,9 @@ function removefiles(dbname) {
 
 describe("FS", () => {
   before(() => {
-    fs.mkdirSync("A1");
+    try {
+      fs.mkdirSync("A1");
+    } catch {}
   });
   after(() => {
     fs.rmSync("A1", { recursive: true, force: true });
@@ -111,7 +113,11 @@ describe("FS", () => {
           try {
             await collection.find({});
           } catch {
-            error = true;
+            try {
+              await collection.findOne({});
+            } catch {
+              error = true;
+            }
           }
         }
       }
@@ -123,8 +129,8 @@ describe("FS", () => {
       let collection = await db.getCollection("helloworld");
       await collection.insertMany([
         { type: "man" },
-        { type: "man" },
         { type: "woman" },
+        { type: "man" },
         { type: "reptile" },
       ]);
       let response = await collection.find({ type: "man" });
@@ -136,6 +142,32 @@ describe("FS", () => {
         )
       )
         throw new Error("not valid find");
+    });
+
+    it("find document in collection", async () => {
+      let db = createDb();
+      let collection = await db.getCollection("helloworld");
+      await collection.insertMany([
+        { type: "man" },
+        { type: "woman" },
+        { type: "man" },
+        { type: "reptile" },
+      ]);
+      let response = await collection.findOne({ type: "reptile" });
+      if (response.type !== "reptile") throw new Error("not valid find");
+    });
+
+    it("return undefined when document not find", async () => {
+      let db = createDb();
+      let collection = await db.getCollection("helloworld");
+      await collection.insertMany([
+        { type: "man" },
+        { type: "woman" },
+        { type: "man" },
+        { type: "reptile" },
+      ]);
+      let response = await collection.findOne({ type: "d" });
+      if (response !== undefined) throw new Error("not valid find");
     });
 
     it("throw error if collection already exists", async () => {
