@@ -59,6 +59,29 @@ export class TessraCollection {
       });
     });
   }
+  public findOne(filter: Object): Promise<collectionDocument> {
+    return new Promise(async (res, rej) => {
+      let readStream = fs.createReadStream(this.path);
+      let objReadStream = JSONS.parse([true]);
+      readStream.pipe(objReadStream);
+
+      objReadStream.on("error", (err) => {
+        rej(err);
+      });
+
+      objReadStream.on("data", (data) => {
+        if (this.#isFiltValid(filter, data)) {
+          objReadStream.destroy();
+          readStream.destroy();
+          res(data);
+        }
+      });
+
+      objReadStream.on("end", async () => {
+        res(undefined);
+      });
+    });
+  }
   /**
    * Insert a document to collection
    * @param doc Document to insert
