@@ -1,3 +1,10 @@
+## [1.5.1](https://github.com/artegoser/TessraDB/compare/v1.5.0...v1.5.1) (2022-01-06)
+
+
+### Bug Fixes
+
+* locked condition ([9011b93](https://github.com/artegoser/TessraDB/commit/9011b93c8a762f05f6bf08167b1679c243a9d689))
+
 # [1.5.0](https://github.com/artegoser/TessraDB/compare/v1.4.0...v1.5.0) (2022-01-06)
 
 
