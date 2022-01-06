@@ -11,7 +11,8 @@
     "coverage": "nyc npm run test",
     "coveralls": "npm run coverage && nyc report --reporter=text-lcov | coveralls",
     "co-publish": "npm run build && npm publish",
-    "build": "tsc"
+    "build": "tsc",
+    "docs": "typedoc ./src/core.ts ./src/collection.ts ./src/interfaces.ts --readme README.md --name TessraDB --out ./docs/ --tsconfig tsconfig.json"
   },
   "nyc": {
     "exclude": "**/*.spec.js"
@@ -41,6 +42,7 @@
     "husky": "^7.0.4",
     "mocha": "^9.1.3",
     "nyc": "^15.1.0",
+    "typedoc": "^0.22.10",
     "typescript": "^4.5.4"
   },
   "dependencies": {
