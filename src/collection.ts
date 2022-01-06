@@ -27,17 +27,20 @@ export class TessraCollection {
   }
   /**
    * checking the object for compliance with the filter
-   * @param filt filter for object ({id:1, type:"help"})
+   * @param filt filter for object find({id:1, type:"help"})
    * @param obj object to compare
-   * @returns {boolean}
    */
-  #isFiltValid(filt: Object, obj: Object) {
+  #isFiltValid(filt: Object, obj: Object): boolean {
     let filtnames: Array<string> = Object.keys(filt);
     for (let filtname of filtnames) {
       if (filt[filtname] !== obj[filtname]) return false;
     }
     return true;
   }
+  /**
+   * function to find documents by filter in collection
+   * @param filter filter object find({id:1, type:"help"})
+   */
   public find(filter: Object): Promise<Array<collectionDocument>> {
     return new Promise(async (res, rej) => {
       let readStream = fs.createReadStream(this.path);
@@ -59,6 +62,10 @@ export class TessraCollection {
       });
     });
   }
+  /**
+   * function to find one document by filter in collection
+   * @param filter filter object find({id:1, type:"help"})
+   */
   public findOne(filter: Object): Promise<collectionDocument> {
     return new Promise(async (res, rej) => {
       let readStream = fs.createReadStream(this.path);
