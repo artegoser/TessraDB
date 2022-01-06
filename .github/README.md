@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <a href="https://artegoser.github.io/TessraDB/"><img src="https://artegoser.github.io\tessraStatic\tessradb.png" alt="Markdownify" width="200"></a>
+    <a href="https://artegoser.github.io/TessraDB/"><img src="https://artegoser.github.io/tessraStatic/tessradb.png" alt="Markdownify" width="200"></a>
   <br>
   TessraDB
   <br>
