@@ -2,7 +2,8 @@
   <br>
     <a href="https://artegoser.github.io/TessraDB/"><img src="https://artegoser.github.io/tessraStatic/tessradb.png" alt="Markdownify" width="200"></a>
   <br>
-  TessraDB
+  TessraDB 
+  <a href="https://twitter.com/intent/tweet?text=Get%20serverless%20JSON%20Database&url=https://github.com/artegoser/TessraDB&hashtags=typescript,database,serverless,nosql,db,embeddedDatabase,nosqlDatabase,jsonDatabase,tessradb"><img alt="Tweet me" src="https://img.shields.io/twitter/url/http/shields.io.svg?style=social"></a>
   <br>
 </h1>
 
@@ -18,6 +19,10 @@
   <a href="https://coveralls.io/github/artegoser/TessraDB">
     <img alt="Coveralls" src="https://img.shields.io/coveralls/github/artegoser/TessraDB">
   </a>
+</p>
+
+<p align="center">
+  <a href="https://www.reddit.com/r/tessradb/"><img alt="Subreddit subscribers" src="https://img.shields.io/reddit/subreddit-subscribers/TessraDB?style=social"></a>
 </p>
 
 <p align="center">
