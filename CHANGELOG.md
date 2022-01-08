@@ -1,3 +1,15 @@
+# [1.6.0](https://github.com/artegoser/TessraDB/compare/v1.5.2...v1.6.0) (2022-01-08)
+
+
+### Features
+
+* insertedDocument interface ([aa756d7](https://github.com/artegoser/TessraDB/commit/aa756d71e5856b9aa790c8f3ab6831d4e1e6b7fa))
+
+
+### Performance Improvements
+
+* singleton collection object ([da683f5](https://github.com/artegoser/TessraDB/commit/da683f55a7d2d0b98dfb2ace183d53507d047a37))
+
 ## [1.5.2](https://github.com/artegoser/TessraDB/compare/v1.5.1...v1.5.2) (2022-01-06)
 
 
