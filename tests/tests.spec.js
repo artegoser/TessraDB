@@ -66,14 +66,13 @@ describe("FS", () => {
         throw new Error("collection is not created");
     });
 
-    it("get collection by name", async () => {
+    it("Create collection and then get by name", async () => {
       let db = createDb();
       await db.createCollection("helloworld");
-      if (!(await db.getCollection("helloworld")))
-        throw new Error("collection is not created");
+      await db.getCollection("helloworld");
     });
 
-    it("get collection without creating collection", async () => {
+    it("get collection by name", async () => {
       let db = createDb();
       if (!(await db.getCollection("helloworld")))
         throw new Error("collection is not created");
@@ -180,12 +179,6 @@ describe("FS", () => {
         error = true;
       }
       if (error === false) throw new Error("there was no error");
-    });
-
-    it("returning parsed collections", async () => {
-      let db = createDb();
-      await db.createCollection("helloworld");
-      if (!db.collections.helloworld) throw new Error("No collections");
     });
   });
 });
