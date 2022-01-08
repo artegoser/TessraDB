@@ -13,3 +13,8 @@ export interface atomWriteStream {
   stream: WriteStream;
   end: () => void;
 }
+
+export interface insertedDocument {
+  data: collectionDocument
+  update: () => void;
+}
