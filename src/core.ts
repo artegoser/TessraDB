@@ -10,6 +10,7 @@ import { collectionObject } from "./interfaces";
 export class TessraDB {
   public name: string;
   public colNames: Array<string>;
+  #collections: collectionObject = {};
   #metaPath: string;
   constructor(name: string) {
     this.name = name;
@@ -48,37 +49,32 @@ export class TessraDB {
     await aw.writeFile(this.#metaPath, JSON.stringify(this.colNames));
   }
   /**
-   * A collections object is a read-only variable that contains all the collections in the database
-   * @returns all collections in db
-   */
-  public get collections(): collectionObject {
-    let collect: collectionObject = {};
-    for (let collectionName of this.colNames) {
-      collect[collectionName] = new TessraCollection(
-        collectionName,
-        this.#getCollectionPath(collectionName)
-      );
-    }
-    return collect;
-  }
-  /**
    * Function to get collection by name
    * @param name name of the collection
    * @returns full collection
    */
   public async getCollection(name: string): Promise<TessraCollection> {
-    if (this.colNames.indexOf(name) < 0) await this.#addCollectionToMeta(name);
-    let collection = new TessraCollection(name, this.#getCollectionPath(name));
+    let collection: TessraCollection;
+    if (this.colNames.indexOf(name) < 0) {
+      await this.#addCollectionToMeta(name);
+      collection = new TessraCollection(name, this.#getCollectionPath(name));
+      this.#collections[name] = collection;
+    } else {
+      collection = this.#collections[name];
+    }
     return collection;
   }
   /**
    * Creates collection
    * @param name name of the collection
    */
-  public async createCollection(name: string): Promise<void> {
+  public async createCollection(name: string): Promise<TessraCollection> {
     if (!(this.colNames.indexOf(name) < 0))
       throw new Error("Collection already exists. Please, drop collection");
     await aw.writeFile(path.join(this.name, name + ".tdb"), "[]");
     await this.#addCollectionToMeta(name);
+    let collection = new TessraCollection(name, this.#getCollectionPath(name));
+    this.#collections[name] = collection;
+    return collection;
   }
 }
