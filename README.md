@@ -93,6 +93,8 @@ You can also suggest new features in [issues](https://github.com/artegoser/Tessr
 
 ## Contributing
 
+![Our contributors](https://badges.pufler.dev/contributors/artegoser/tessradb?size=50&padding=2&bots=false)
+
 Your contributions are always welcome! Please look at the [contribution guidelines](https://github.com/artegoser/TessraDB/blob/main/.github/CONTRIBUTING.md) first. 🎉
 
 ## Credits
