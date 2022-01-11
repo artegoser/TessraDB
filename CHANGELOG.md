@@ -1,3 +1,11 @@
+# [1.7.0](https://github.com/artegoser/TessraDB/compare/v1.6.0...v1.7.0) (2022-01-11)
+
+
+### Features
+
+* replace ([2b1448f](https://github.com/artegoser/TessraDB/commit/2b1448f30e0909b103bd74ced8f0116410665610))
+* replaceMany ([c893d66](https://github.com/artegoser/TessraDB/commit/c893d669fd09df4944ee7308a957929bf4a1673e))
+
 # [1.6.0](https://github.com/artegoser/TessraDB/compare/v1.5.2...v1.6.0) (2022-01-08)
 
 
