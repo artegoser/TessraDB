@@ -150,6 +150,39 @@ export class TessraCollection {
     });
   }
   /**
+   * Replace documents in collection
+   * @param filter Filter
+   * @param doc Document to insert
+   */
+   public replaceMany(filter: Object, doc: collectionDocument): Promise<void> {
+    return new Promise(async (res, rej) => {
+      this.#locked = true;
+      let readStream = fs.createReadStream(this.path);
+      let objReadStream = JSONS.parse([true]);
+      let objWriteStream = await aw.objWriteStream(this.path);
+      readStream.pipe(objReadStream);
+
+      objReadStream.on("error", (err) => {
+        this.#locked = false;
+        rej(err);
+      });
+
+      objReadStream.on("data", (data) => {
+        if (this.#isFiltValid(filter, data)) {
+          data = doc;
+        }
+        objWriteStream.stream.write(data);
+      });
+
+      objReadStream.on("end", async () => {
+        objWriteStream.stream.write(doc);
+        await objWriteStream.end();
+        this.#locked = false;
+        res();
+      });
+    });
+  }
+  /**
    * Replace document in collection
    * @param filter Filter
    * @param doc Document to insert
