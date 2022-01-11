@@ -8,7 +8,7 @@
 - [x] Stream read and write collections
 - [x] Insert documents to collection (insert, insertMany)
 - [x] Find documents in collection (functions find, findOne)
-- [ ] Replace documents by value (replace, replaceOne)
-- [ ] Update documents by value (update, updateOne)
+- [x] Replace documents by value (replace, replaceMany)
+- [ ] Update documents by value (update, updateMany)
 - [ ] Drop collection
 - [ ] Delete documents from collection (delete, deleteMany)

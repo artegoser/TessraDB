@@ -88,6 +88,45 @@ describe("FS", () => {
         throw new Error("document not inserted");
     });
 
+    it("should replace documents in collection", async () => {
+      let db = createDb();
+      let collection = await db.getCollection("helloworld");
+      await collection.insert({ hello: "world", type: "replaced" });
+      await collection.insert({ hello: "dlrow", type: "replace" });
+      await collection.insert({ hello: "wrold", type: "replace" });
+
+      await collection.replaceMany(
+        { type: "replace" },
+        { hello: "world", type: "replaced" }
+      );
+      let filecol = JSON.parse(fs.readFileSync(collection.path, "utf-8"));
+      if (
+        filecol[0].type !== "replaced" &&
+        filecol[1].type !== "replaced" &&
+        filecol[2].type !== "replaced"
+      )
+        throw new Error("document not replaced");
+    });
+
+    it("should replace documents in collection", async () => {
+      let db = createDb();
+      let collection = await db.getCollection("helloworld");
+      await collection.insert({ hello: "world", type: "replaced" });
+      await collection.insert({ hello: "dlrow", type: "replace" });
+      await collection.insert({ hello: "wrold", type: "replace" });
+
+      await collection.replace(
+        { type: "replace" },
+        { hello: "world", type: "replaced" }
+      );
+      let filecol = JSON.parse(fs.readFileSync(collection.path, "utf-8"));
+      if (
+        filecol[1].type !== "replaced" &&
+        filecol[2].type === "replaced"
+      )
+        throw new Error("document not replaced/replaced wrong");
+    });
+
     it("should insert many documents to collection", async () => {
       let db = createDb();
       let collection = await db.getCollection("helloworld");
@@ -115,7 +154,21 @@ describe("FS", () => {
             try {
               await collection.findOne({});
             } catch {
-              error = true;
+              try {
+                await collection.replaceMany(
+                  { hello: "dlrow" },
+                  { hello: "world" }
+                );
+              } catch {
+                try {
+                  await collection.replace(
+                    { hello: "world" },
+                    { hello: "dlrow" }
+                  );
+                } catch {
+                  error = true;
+                }
+              }
             }
           }
         }
