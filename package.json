@@ -12,7 +12,8 @@
     "coveralls": "npm run coverage && nyc report --reporter=text-lcov | coveralls",
     "co-publish": "npm run build && npm publish",
     "build": "tsc",
-    "docs": "typedoc ./src/core.ts ./src/collection.ts ./src/interfaces.ts --readme .github/README.md --name TessraDB --out ./docs/ --tsconfig tsconfig.json"
+    "docs": "typedoc ./src/core.ts ./src/collection.ts ./src/interfaces.ts --readme .github/README.md --name TessraDB --out ./docs/ --tsconfig tsconfig.json",
+    "prepare":"husky install"
   },
   "nyc": {
     "exclude": "**/*.spec.js"
