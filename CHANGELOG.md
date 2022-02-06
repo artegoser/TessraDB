@@ -1,3 +1,10 @@
+## [1.7.1](https://github.com/artegoser/TessraDB/compare/v1.7.0...v1.7.1) (2022-02-06)
+
+
+### Bug Fixes
+
+* ignore test folder ([f820e97](https://github.com/artegoser/TessraDB/commit/f820e97ea5cb605804bbb8657f6368b9b53f42c7))
+
 # [1.7.0](https://github.com/artegoser/TessraDB/compare/v1.6.0...v1.7.0) (2022-01-11)
 
 
