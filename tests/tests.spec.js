@@ -3,7 +3,7 @@ let folderstodelete = [];
 
 function genid() {
   let length = 8;
-  var result = "A1\\";
+  var result = "A1/";
   var characters =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
   var charactersLength = characters.length;
@@ -120,10 +120,7 @@ describe("FS", () => {
         { hello: "world", type: "replaced" }
       );
       let filecol = JSON.parse(fs.readFileSync(collection.path, "utf-8"));
-      if (
-        filecol[1].type !== "replaced" &&
-        filecol[2].type === "replaced"
-      )
+      if (filecol[1].type !== "replaced" && filecol[2].type === "replaced")
         throw new Error("document not replaced/replaced wrong");
     });
 
