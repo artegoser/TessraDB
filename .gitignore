@@ -3,9 +3,9 @@
 ##only git
 
 
-/TessraDB
 .coveralls.yml
 /docs
+/A1
 
 # Logs
 logs

@@ -9,9 +9,9 @@ release.config.js
 .travis.yml
 ##only npm
 
-/TessraDB
 .coveralls.yml
 /docs
+/A1
 
 # Logs
 logs
