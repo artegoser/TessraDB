@@ -1,3 +1,10 @@
+## [1.7.2](https://github.com/artegoser/TessraDB/compare/v1.7.1...v1.7.2) (2022-02-06)
+
+
+### Bug Fixes
+
+* ignore ([324bce6](https://github.com/artegoser/TessraDB/commit/324bce69455246ed04e393da3317be234cbe9776))
+
 ## [1.7.1](https://github.com/artegoser/TessraDB/compare/v1.7.0...v1.7.1) (2022-02-06)
 
 
