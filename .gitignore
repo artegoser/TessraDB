@@ -4,8 +4,8 @@
 
 
 .coveralls.yml
-/docs
-/A1
+docs/
+A1/
 
 # Logs
 logs

@@ -10,8 +10,9 @@ release.config.js
 ##only npm
 
 .coveralls.yml
-/docs
-/A1
+docs/
+A1/**/*
+A1/
 
 # Logs
 logs

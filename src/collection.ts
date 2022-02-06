@@ -129,7 +129,6 @@ export class TessraCollection {
       let objReadStream = JSONS.parse([true]);
       let objWriteStream = await aw.objWriteStream(this.path);
       readStream.pipe(objReadStream);
-
       objReadStream.on("error", (err) => {
         this.#locked = false;
         rej(err);
@@ -154,7 +153,7 @@ export class TessraCollection {
    * @param filter Filter
    * @param doc Document to insert
    */
-   public replaceMany(filter: Object, doc: collectionDocument): Promise<void> {
+  public replaceMany(filter: Object, doc: collectionDocument): Promise<void> {
     return new Promise(async (res, rej) => {
       this.#locked = true;
       let readStream = fs.createReadStream(this.path);
@@ -185,9 +184,9 @@ export class TessraCollection {
   /**
    * Replace document in collection
    * @param filter Filter
-   * @param doc Document to insert
+   * @param doc Document to replace
    */
-   public replace(filter: Object, doc: collectionDocument): Promise<void> {
+  public replace(filter: Object, doc: collectionDocument): Promise<void> {
     return new Promise(async (res, rej) => {
       this.#locked = true;
       let readStream = fs.createReadStream(this.path);
@@ -203,7 +202,7 @@ export class TessraCollection {
       });
 
       objReadStream.on("data", (data) => {
-        if (this.#isFiltValid(filter, data)&&replaced===false) {
+        if (this.#isFiltValid(filter, data) && replaced === false) {
           data = doc;
         }
         objWriteStream.stream.write(data);
