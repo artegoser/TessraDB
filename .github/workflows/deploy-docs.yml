@@ -1,5 +1,8 @@
 name: Deploy docs
-on: release
+on:
+  push:
+    branches: [main, beta]
+
 jobs:
   deploy:
     name: Deploy docs

@@ -1,3 +1,53 @@
+# [1.7.0](https://github.com/artegoser/TessraDB/compare/v1.6.0...v1.7.0) (2022-01-11)
+
+
+### Features
+
+* replace ([2b1448f](https://github.com/artegoser/TessraDB/commit/2b1448f30e0909b103bd74ced8f0116410665610))
+* replaceMany ([c893d66](https://github.com/artegoser/TessraDB/commit/c893d669fd09df4944ee7308a957929bf4a1673e))
+
+# [1.6.0](https://github.com/artegoser/TessraDB/compare/v1.5.2...v1.6.0) (2022-01-08)
+
+
+### Features
+
+* insertedDocument interface ([aa756d7](https://github.com/artegoser/TessraDB/commit/aa756d71e5856b9aa790c8f3ab6831d4e1e6b7fa))
+
+
+### Performance Improvements
+
+* singleton collection object ([da683f5](https://github.com/artegoser/TessraDB/commit/da683f55a7d2d0b98dfb2ace183d53507d047a37))
+
+## [1.5.2](https://github.com/artegoser/TessraDB/compare/v1.5.1...v1.5.2) (2022-01-06)
+
+
+### Bug Fixes
+
+* objWriteStream is not destroy fileStream after end ([8643831](https://github.com/artegoser/TessraDB/commit/864383119772f6cb74d0df1d005232b801d77a7c))
+
+## [1.5.1](https://github.com/artegoser/TessraDB/compare/v1.5.0...v1.5.1) (2022-01-06)
+
+
+### Bug Fixes
+
+* locked condition ([9011b93](https://github.com/artegoser/TessraDB/commit/9011b93c8a762f05f6bf08167b1679c243a9d689))
+
+# [1.5.0](https://github.com/artegoser/TessraDB/compare/v1.4.0...v1.5.0) (2022-01-06)
+
+
+### Features
+
+* collection.findOne ([5f89316](https://github.com/artegoser/TessraDB/commit/5f8931643ecb479cd945d1a192af5a93438a158e))
+
+# [1.4.0](https://github.com/artegoser/TessraDB/compare/v1.3.0...v1.4.0) (2022-01-05)
+
+
+### Features
+
+* **collection:** insertMany ([867ddb1](https://github.com/artegoser/TessraDB/commit/867ddb1df752d4d2b5119c196a98d348f4c7faea))
+* find ([796366c](https://github.com/artegoser/TessraDB/commit/796366c2a0872d5335b211808daa6f7e757b5a8f))
+* insertMany ([44e8a53](https://github.com/artegoser/TessraDB/commit/44e8a53a1ff134c0637924de5dcab27e5d22eed0))
+
 # [1.3.0](https://github.com/artegoser/TessraDB/compare/v1.2.0...v1.3.0) (2022-01-05)
 
 
